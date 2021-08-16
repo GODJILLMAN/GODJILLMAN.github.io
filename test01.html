@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test01</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        
+        .btn {
+            background-color: #f9ca24;
+            color: white;
+            padding: 15px 15px;
+            margin-top: 20px;
+            border: 0;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 3px rgba(249, 202, 36, 0.5);
+        }
+        
+        .btn:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+        
+        .container {
+            margin: 20px auto;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .container>div {
+            background-image: url("cat.gif");
+            background-repeat: no-repeat;
+            background-size: 400px 400px;
+            width: 130px;
+            height: 130px;
+            transition: 1.2s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn" onclick="reversePng()">点击有效果哦~</button>
+    <div id="a" class="container">
+        <div style="background-position: 0 0;"></div>
+        <div style="background-position: -130px 0;"></div>
+        <div style="background-position: -260px 0;"></div>
+        <div style="background-position: 0 -130px;"></div>
+        <div style="background-position: -130px -130px;"></div>
+        <div style="background-position: -260px -130px;"></div>
+        <div style="background-position: -0px -260px;"></div>
+        <div style="background-position: -130px -260px;"></div>
+        <div style="background-position: -260px -260px;"></div>
+    </div>
+</body>
+<script>
+    var r = 0
+
+    function reversePng() {
+        r += 360
+        var alldivs = document.getElementsByClassName("container")[0];
+        for (var i = 0; i < 9; i++)
+            alldivs.children[i].style.transform = 'rotate(' + r + 'deg)';
+    }
+</script>
+
+</html>
