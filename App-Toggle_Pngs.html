@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App-Toggle_Pngs</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        #app {
+            position: relative;
+            top: 20%;
+        }
+        
+        #zhezhao {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.15);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: -2;
+        }
+        
+        #Tixing {
+            border-bottom: 60px solid white;
+            border-right: 80px solid transparent;
+            width: 350px;
+            margin: auto;
+        }
+        
+        #title {
+            position: absolute;
+            top: 0;
+            left: 40%;
+            font-size: 30px;
+            margin: 10px;
+            color: #9a9a9a;
+        }
+        
+        #photos {
+            margin: 2px auto;
+            width: 430px;
+            height: 430px;
+            background-color: white;
+            /* background-image: url("../images/app2-3.png"); */
+            /* background-repeat: no-repeat; */
+            /* background-size: 430px 430px; */
+        }
+        
+        .toggle {
+            padding: 5px 0;
+            text-align: center;
+            background-color: rgba(120, 123, 124, 0.5);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 40px;
+        }
+        
+        #toggle_before {
+            position: absolute;
+            left: 36%;
+            top: 47%;
+        }
+        
+        #toggle_after {
+            position: absolute;
+            left: 62%;
+            top: 47%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="Tixing"></div>
+        <p id="title">切换图片</p>
+        <div id="zhezhao"></div>
+        <div id="photos">
+            <img :src="Image" width="430px" height="430px">
+        </div>
+        <!-- （禁止）避免选中span内的文字 onselectstart="return false" onselect="document.selection.empty()" -->
+        <span id="toggle_before" onselectstart="return false" onselect="document.selection.empty()" v-show="toggle_before_flag" class="toggle" @click="before"><</span>
+        <span id="toggle_after" onselectstart="return false" onselect="document.selection.empty()" v-show="toggle_after_flag" class="toggle" @click="after">></span>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            toggle_before_flag: false,
+            toggle_after_flag: true,
+            Image: "../images/app2-1.png",
+            imgSrcs: ["../images/app2-1.png", "../images/app2-2.png", "../images/app2-3.png", "../images/app2-4.png", "../images/app2-5.png"]
+        },
+        methods: {
+            before: function() {
+                this.toggle_after_flag = true;
+                flag = 0;
+                for (var i = 5; i > 0; i--) {
+                    if (this.Image == this.imgSrcs[i]) {
+                        this.Image = this.imgSrcs[i - 1];
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 0 || this.Image == this.imgSrcs[0])
+                    this.toggle_before_flag = false;
+            },
+            after: function() {
+                this.toggle_before_flag = true;
+                flag = 0;
+                for (var i = 0; i < 4; i++) {
+                    if (this.Image == this.imgSrcs[i]) {
+                        this.Image = this.imgSrcs[i + 1];
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 0 || this.Image == this.imgSrcs[4])
+                    this.toggle_after_flag = false;
+            }
+        }
+    })
+</script>
+
+</html>
