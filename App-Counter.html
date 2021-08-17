@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../staticSource/js/vue.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        #app {
+            margin: auto;
+            position: relative;
+            top: 40%;
+            display: flex;
+            width: 310px;
+            background-color: #e8e8e8;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            width: 100px;
+            height: 50px;
+            background-color: #e8e8e8;
+            color: red;
+            font-size: 30px;
+            border-radius: 3px;
+            border: 0;
+        }
+        
+        input {
+            font-size: 30px;
+            text-align: center;
+            width: 100px;
+            border: 0;
+        }
+        
+        input:focus {
+            outline: none;
+        }
+        
+        p {
+            text-align: center;
+            font-family: 幼圆;
+            font-size: 30px;
+        }
+        
+        .pdiv {
+            width: 310px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="pdiv">
+            <p>我是一个计数器</p>
+        </div>
+        <button @click="decrease">-</button>
+        <input type="text" readonly v-model="num"></input>
+        <button @click="increase">+</button>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            num: 0,
+        },
+        methods: {
+            increase: function() {
+                this.num += 1;
+            },
+            decrease: function() {
+                if (this.num <= 0)
+                    alert("不能再减少了哦~");
+                else
+                    this.num -= 1;
+            }
+        }
+    })
+</script>
+
+</html>
